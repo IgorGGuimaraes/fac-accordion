@@ -1,46 +1,36 @@
-const buttonList = document.querySelectorAll('.button');
-const iconList = document.querySelectorAll(".icon");
-const div = document.querySelectorAll('.container__answer');
-const imgArray = ["assets/images/icon-minus.svg", "assets/images/icon-plus.svg"];
+const btnList = document.querySelectorAll('.button');
+const srcArray = ['./assets/images/icon-minus.svg', './assets/images/icon-plus.svg'];
 
-//functions
+const divList = document.querySelectorAll('.answer');
+const iconList = document.querySelectorAll('.icon');
 
 
-function changeImgSource () {
-    if (idIcon.src.match(imgArray[0])) {
-        idIcon.src = imgArray[1];
-    } else if (idIcon.src.match(imgArray[1])) {
-        idIcon.src = imgArray[0];
-    }
+for (i = 0; i < btnList.length; i++) {
+    const btn = btnList[i];
+    const btnClass = btn.classList[1];
+
+    function showHide() {
+
+        Array.from(divList).forEach((e) => {
+            if (e.style.display !== 'block' && e.classList[2] === btnClass) {
+                e.style.display = 'block';
+            } else if (e.classList[2] === btnClass) {
+                e.style.display = 'none';
+        }
+    })
 }
 
-function showHide () {
-    if (idAnswer.style.display === "none") {
-        idAnswer.style.display = block;
-    } else {
-        idAnswer.style.display = none;
-    }
-}
+    function changeIcon() {
 
-function all () {
-    showHide ();
-    changeImgSource ();
-}
-
-//i dont know :,()
-
-let count = 0;
-
-while (count < buttonList.length) {
-    const button = buttonList[count];
-    const classButton = button.classList[1];
-    const idIcon = `#icon_${classButton}`;
-    const idAnswer =`#answer_${classButton}`;
-
-    button.onclick = function () {
-        showHide(idAnswer);
+        Array.from(iconList).forEach((e) => {
+            if (e.src.match(srcArray[0]) && e.classList[2] === btnClass) {
+                e.src = srcArray[1];
+            } else if ( e.classList[2] === btnClass) {
+                e.src = srcArray[0];
+            }
+        })
     }
 
-    count++;
+    btn.addEventListener("click", showHide);
+    btn.addEventListener("click", changeIcon);
 }
-
